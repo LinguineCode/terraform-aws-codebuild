@@ -1,0 +1,41 @@
+name = "my-codebuild-projects"
+
+git_projects = [
+  {
+    name             = "myApiProject"
+    org              = "mycompany"
+    source_buildspec = "foo.yaml"
+  },
+  {
+    name                     = "myFrontEndCode"
+    org                      = "mycompany"
+    environment_compute_type = "BUILD_GENERAL1_MEDIUM"
+    environment_variables = [
+      {
+        name  = "hello",
+        value = "world",
+        type  = "PLAINTEXT"
+      }
+    ]
+    additional_iam_policies = [
+      {
+        actions = [
+          "ec2:Describe*",
+        ]
+
+        resources = [
+          "*"
+        ]
+      },
+      {
+        actions = [
+          "ssm:Describe*",
+        ]
+
+        resources = [
+          "arn:aws:ssm:us-west-2:123456789012:document/MyDocument-*"
+        ]
+      },
+    ]
+  }
+]
